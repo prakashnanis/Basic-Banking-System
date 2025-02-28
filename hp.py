@@ -29,6 +29,53 @@ def find_and_save_duplicates(pdf_path, output_folder="output"):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if len(occurrences) > 1:  # Only process if there are duplicates
+            for i, occurrence in enumerate(occurrences[1:], start=1):  # Skip the first occurrence
+                duplicate_image = Image.open(io.BytesIO(occurrence['image_bytes']))
+                duplicate_filename = os.path.join(output_folder, f"duplicate_image_{duplicate_count + 1}.png")
+                duplicate_image.save(duplicate_filename)
+                duplicate_count += 1
+                print(f"Saved duplicate {duplicate_count}: Page {occurrence['page_num']}")
+
+    print(f"Total duplicate images found: {duplicate_count}")
+
+# Example usage
+pdf_path = 'testing.pdf'
+find_and_save_duplicates(pdf_path)
+
     image_data = extract_images_from_pdf(pdf_path)
     seen = {}
     duplicate_count = 0
